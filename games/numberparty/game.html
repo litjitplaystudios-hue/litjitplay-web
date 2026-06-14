@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>GOL</title>
+  <link rel="stylesheet" href="css/main.css">
+  <script src="js/scaler.js" defer></script>
+  <link rel="modulepreload" href="js/quiz.js">
+  <link rel="modulepreload" href="js/quizFactory.js">
+  <link rel="modulepreload" href="js/swipeInput.js">
+  <link rel="modulepreload" href="js/gameController.js">
+  <link rel="preload" as="fetch" href="data/lv.json" crossorigin>
+  <script src="js/spine-canvas.js" defer></script>
+</head>
+<body>
+
+  <!-- Loading overlay — hidden once Spine assets are ready -->
+  <div id="loading">LOADING</div>
+
+  <div id="game-screen" class="screen">
+
+    <!-- HUD -->
+    <div id="hud">
+      <div id="hud-stats">
+        <div id="score-display">
+          <span class="stat-label">SCORE</span>
+          <span class="stat-value" id="score">0</span>
+        </div>
+        <div id="hud-center">
+          <span id="level-val">Level 1</span>
+          <div id="op-indicator">
+            <span id="op-arrow">▼</span>
+            <span id="op-label">—</span>
+          </div>
+        </div>
+        <div id="combo-display">
+          <span class="stat-label">COMBO</span>
+          <span class="stat-value" id="combo">0</span>
+        </div>
+      </div>
+      <div id="time-bar-track"><div id="time-fill"></div></div>
+    </div>
+
+    <!-- Panels -->
+    <div id="quiz-area"></div>
+
+    <!-- Invisible swipe/tap capture layer -->
+    <div id="swipe-area" tabindex="0"></div>
+
+    <!-- Game over overlay -->
+    <div id="gameover" class="hidden">
+      <span id="gameover-text">GAME OVER</span>
+    </div>
+
+    <!-- Countdown overlay -->
+    <div id="countdown" class="hidden">
+      <span id="countdown-text"></span>
+    </div>
+
+  </div>
+
+  <script type="module">
+    import { GameController }  from './js/gameController.js';
+    import { SwipeInput }      from './js/swipeInput.js';
+    import { load as spineLoad, createBlock, destroyAll, playAnim, playIncorrect } from './js/spineRenderer.js';
+    import { loadSfx, play as playSfx, unlockAudio } from './js/sfx.js';
+
+    const SKIN_MAP = { 1:'Number', 2:'Negative', 3:'Word', 4:'Dice', 5:'FiveBar', 6:'Roman', 7:'Clock' };
+
+    // Mulberry32 seeded PRNG — same seed → identical quiz sequence
+    function makeRng(seed) {
+      let s = seed >>> 0;
+      return () => {
+        s = (s + 0x6D2B79F5) >>> 0;
+        let t = Math.imul(s ^ (s >>> 15), 1 | s);
+        t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+        return ((t ^ (t >>> 14)) >>> 0) / 0x100000000;
+      };
+    }
+
+    // ── Countdown ──
+
+    function runCountdown(startCb) {
+      return new Promise(resolve => {
+        const overlay = document.getElementById('countdown');
+        const textEl  = document.getElementById('countdown-text');
+        overlay.classList.remove('hidden');
+
+        const steps = [['3', 'num', 1000], ['2', 'num', 1000], ['1', 'num', 1000]];
+        let i = 0;
+
+        function nextStep() {
+          if (i < steps.length) {
+            const [label, cls, dur] = steps[i++];
+            textEl.textContent = label;
+            textEl.className = '';
+            void textEl.offsetWidth;
+            textEl.className = cls;
+            setTimeout(nextStep, dur);
+          } else {
+            // Show START and begin the game simultaneously
+            textEl.textContent = 'START';
+            textEl.className = '';
+            void textEl.offsetWidth;
+            textEl.className = 'start';
+            startCb();
+            setTimeout(() => {
+              overlay.classList.add('hidden');
+              resolve();
+            }, 750);
+          }
+        }
+
+        nextStep();
+      });
+    }
+
+    // ── DOM refs ──
+    const quizArea    = document.getElementById('quiz-area');
+    const timeFillEl  = document.getElementById('time-fill');
+    const scoreEl     = document.getElementById('score');
+    const comboEl     = document.getElementById('combo');
+    const swipeArea   = document.getElementById('swipe-area');
+    const loadingEl   = document.getElementById('loading');
+    const opArrowEl  = document.getElementById('op-arrow');
+    const opLabelEl  = document.getElementById('op-label');
+    const levelValEl = document.getElementById('level-val');
+
+    // ── State ──
+    let panels = []; // parallel to controller._quizList
+
+    // ── Block / row / panel creation ──
+
+    function createBlockEl(block) {
+      const el = document.createElement('div');
+      el.className = `block t-${block.getBlockType()}`;
+      el.appendChild(createBlock(block.getNumber(), SKIN_MAP[block.getBlockType()] || 'Number'));
+      return el;
+    }
+
+    function createRowEl(line) {
+      const row = document.createElement('div');
+      row.className = 'quiz-row';
+      row.dataset.answer = line.Answer;
+
+      const left = document.createElement('div');
+      left.className = 'side left';
+      for (let i = 0; i < line.LeftBlock.length; i++) {
+        if (i > 0) {
+          const plus = document.createElement('span');
+          plus.className = 'block-op';
+          plus.textContent = '+';
+          left.appendChild(plus);
+        }
+        left.appendChild(createBlockEl(line.LeftBlock[i]));
+      }
+
+      const div = document.createElement('div');
+      div.className = 'divider';
+      const eq = document.createElement('span');
+      eq.textContent = '=';
+      div.appendChild(eq);
+
+      const right = document.createElement('div');
+      right.className = 'side right';
+      for (let i = 0; i < line.RightBlock.length; i++) {
+        if (i > 0) {
+          const plus = document.createElement('span');
+          plus.className = 'block-op';
+          plus.textContent = '+';
+          right.appendChild(plus);
+        }
+        right.appendChild(createBlockEl(line.RightBlock[i]));
+      }
+
+      row.append(left, div, right);
+      return row;
+    }
+
+    function createPanelEl(quiz) {
+      const panel = document.createElement('div');
+      panel.className = 'quiz-panel';
+      for (const line of quiz.getLines()) {
+        panel.appendChild(createRowEl(line));
+      }
+      return panel;
+    }
+
+    function updateOpIndicator() {
+      if (panels.length === 0) return;
+      const firstRow = panels[0].querySelector('.quiz-row');
+      if (!firstRow) return;
+      const answer = parseInt(firstRow.dataset.answer, 10);
+      if (answer === 0)      { opArrowEl.textContent = '◀'; opLabelEl.textContent = 'LEFT';  }
+      else if (answer === 1) { opArrowEl.textContent = '▶'; opLabelEl.textContent = 'RIGHT'; }
+      else                   { opArrowEl.textContent = '='; opLabelEl.textContent = 'EQUAL'; }
+    }
+
+    // ── Animation helpers ──
+
+    function animateBlocksCorrect(sideEl) {
+      sideEl.querySelectorAll('.block').forEach(b => {
+        b.classList.add('anim-correct');
+        const c = b.querySelector('canvas');
+        if (c) playAnim(c, 'correct', false);
+      });
+    }
+
+    function animateBlocksFade(sideEl) {
+      sideEl.querySelectorAll('.block').forEach(b => {
+        b.style.transition = 'opacity 0.15s ease';
+        b.style.opacity = '0';
+      });
+    }
+
+    function animateBlocksIncorrect(sideEl) {
+      sideEl.querySelectorAll('.block').forEach(b => {
+        b.classList.remove('anim-incorrect');
+        void b.offsetWidth;
+        b.classList.add('anim-incorrect');
+        const c = b.querySelector('canvas');
+        if (c) playIncorrect(c);
+      });
+    }
+
+    // ── View update functions ──
+
+    function addQuiz(quiz) {
+      const panelEl = createPanelEl(quiz);
+      quizArea.appendChild(panelEl);
+      panels.push(panelEl);
+      if (panels.length === 1) activateTop();
+    }
+
+    function activateTop() {
+      if (panels.length === 0) return;
+      panels[0].classList.add('active');
+      panels[0].querySelectorAll('canvas').forEach(c => playAnim(c, 'active', true));
+      updateOpIndicator();
+    }
+
+    function onCorrect(side, done) {
+      if (panels.length === 0) return;
+      playSfx(done ? 'quizDone' : 'correct');
+
+      const panel = panels[0];
+      const row   = panel.querySelector('.quiz-row');
+      if (!row) return;
+
+      const leftEl  = row.querySelector('.side.left');
+      const rightEl = row.querySelector('.side.right');
+
+      if (side === 0) { animateBlocksCorrect(leftEl);  animateBlocksFade(rightEl); }
+      if (side === 1) { animateBlocksFade(leftEl);  animateBlocksCorrect(rightEl); }
+      if (side === 2) { animateBlocksCorrect(leftEl);  animateBlocksCorrect(rightEl); }
+
+      // Remove the answered row after block animations settle (~0.3s)
+      setTimeout(() => {
+        destroyAll(row);
+        row.remove();
+
+        if (!done) updateOpIndicator();
+        if (done) {
+          panels.shift();
+          const h = panel.offsetHeight;
+          panel.style.maxHeight    = h + 'px';
+          panel.style.overflow     = 'hidden';
+          panel.style.transition   = 'opacity 0.28s ease, max-height 0.46s cubic-bezier(0.4,0,0.2,1), margin-bottom 0.46s cubic-bezier(0.4,0,0.2,1)';
+          panel.classList.add('exiting');
+          requestAnimationFrame(() => requestAnimationFrame(() => {
+            panel.style.maxHeight    = '0';
+            panel.style.marginBottom = '0';
+            panel.style.opacity      = '0';
+          }));
+          setTimeout(() => {
+            destroyAll(panel);
+            panel.remove();
+            activateTop();
+          }, 480);
+        }
+      }, 300);
+    }
+
+    function onIncorrect(side) {
+      if (panels.length === 0) return;
+      playSfx('incorrect');
+
+      const row = panels[0].querySelector('.quiz-row');
+      if (!row) return;
+
+      if (side === 0 || side === 2) animateBlocksIncorrect(row.querySelector('.side.left'));
+      if (side === 1 || side === 2) animateBlocksIncorrect(row.querySelector('.side.right'));
+    }
+
+    function onGameEnd(result) {
+      sessionStorage.setItem('gameResult', JSON.stringify(result));
+      // Wait for the incorrect shake animation to finish (~400ms), then show overlay
+      setTimeout(() => {
+        document.getElementById('gameover').classList.remove('hidden');
+        setTimeout(() => { window.location.href = 'result.html'; }, 1800);
+      }, 400);
+    }
+
+    // ── Bootstrap ──
+
+    async function init() {
+      const [lvData] = await Promise.all([
+        fetch('data/lv.json').then(r => r.json()),
+        spineLoad('spine'),
+        loadSfx(),
+      ]);
+      loadingEl.style.display = 'none';
+
+      // Consume seed from challenge link (one-time); replay gets a fresh random seed
+      const rawSeed = sessionStorage.getItem('pendingSeed');
+      sessionStorage.removeItem('pendingSeed');
+      const seed = rawSeed != null ? (parseInt(rawSeed, 10) >>> 0)
+                                   : (Math.random() * 0x100000000 >>> 0);
+
+      const controller = new GameController(lvData, makeRng(seed));
+
+      // Wire callbacks
+      controller.onScoreUpdate = v => { scoreEl.textContent = v; };
+      controller.onComboUpdate = v => { comboEl.textContent = v; };
+      controller.onTimeFill    = f => {
+        timeFillEl.style.transform = `scaleX(${Math.max(0, f)})`;
+      };
+      controller.onQuizAdded  = quiz => addQuiz(quiz);
+      controller.onCorrect    = (side, done) => onCorrect(side, done);
+      controller.onIncorrect  = side => onIncorrect(side);
+      controller.onGameEnd    = result => onGameEnd({ ...result, seed });
+      controller.onLevelUpdate = v => { levelValEl.textContent = `Level ${v}`; };
+
+      // Wire input
+      const swipe = new SwipeInput(swipeArea);
+      swipeArea.addEventListener('lefttap',  () => { unlockAudio(); playSfx('tap'); controller.answerLeft(); });
+      swipeArea.addEventListener('righttap', () => { unlockAudio(); playSfx('tap'); controller.answerRight(); });
+      swipeArea.addEventListener('midtap',   () => { unlockAudio(); playSfx('tap'); controller.answerMid(); });
+      swipeArea.addEventListener('swipe',    () => { unlockAudio(); playSfx('tap'); controller.answerSwipe(); });
+
+      document.addEventListener('keydown', e => {
+        if (e.repeat) return;
+        if (e.key === 'ArrowLeft'  || e.key === 'a' || e.key === 'A') { unlockAudio(); playSfx('tap'); controller.answerLeft();  }
+        if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') { unlockAudio(); playSfx('tap'); controller.answerRight(); }
+        if (e.key === 'ArrowUp'    || e.key === 'ArrowDown' ||
+            e.key === 'w'          || e.key === 'W' ||
+            e.key === 's'          || e.key === 'S')                  { unlockAudio(); playSfx('tap'); controller.answerMid();   }
+      });
+
+      // Handle duel launch from sessionStorage
+      const duelRaw = sessionStorage.getItem('pendingDuelChallenge');
+      if (duelRaw) {
+        sessionStorage.removeItem('pendingDuelChallenge');
+        const duelData = JSON.parse(duelRaw);
+        await runCountdown(() => controller.startDuelGame(duelData));
+      } else {
+        await runCountdown(() => controller.startGame());
+      }
+
+      swipeArea.focus();
+    }
+
+    init().catch(err => {
+      console.error(err);
+      loadingEl.textContent = 'LOAD FAILED — check console';
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,924 @@
+
+VisualTypes.png
+size: 1024, 1024
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+Clock/Clk_00
+  rotate: false
+  xy: 675, 258
+  size: 209, 209
+  orig: 209, 209
+  offset: 0, 0
+  index: -1
+Clock/Clk_Glow
+  rotate: false
+  xy: 2, 450
+  size: 229, 229
+  orig: 240, 240
+  offset: 5, 6
+  index: -1
+Dice/Dic_Glow
+  rotate: false
+  xy: 2, 226
+  size: 222, 222
+  orig: 240, 240
+  offset: 9, 9
+  index: -1
+Five-Bar/Fiv_Glow
+  rotate: false
+  xy: 237, 685
+  size: 236, 230
+  orig: 247, 240
+  offset: 5, 5
+  index: -1
+Negative/Neg_01
+  rotate: false
+  xy: 226, 61
+  size: 214, 214
+  orig: 214, 214
+  offset: 0, 0
+  index: -1
+Negative/Neg_Glow
+  rotate: false
+  xy: 2, 681
+  size: 233, 234
+  orig: 239, 240
+  offset: 3, 3
+  index: -1
+Number TH/NumTH_Glow
+  rotate: false
+  xy: 2, 2
+  size: 222, 222
+  orig: 240, 240
+  offset: 9, 9
+  index: -1
+Number/Num_Glow
+  rotate: false
+  xy: 475, 469
+  size: 222, 222
+  orig: 240, 240
+  offset: 9, 9
+  index: -1
+Roman/Rom_Glow
+  rotate: false
+  xy: 699, 470
+  size: 221, 221
+  orig: 240, 240
+  offset: 9, 10
+  index: -1
+Word TH/WrdTH_01
+  rotate: false
+  xy: 237, 481
+  size: 219, 202
+  orig: 219, 202
+  offset: 0, 0
+  index: -1
+Word TH/WrdTH_04
+  rotate: false
+  xy: 233, 277
+  size: 219, 202
+  orig: 219, 202
+  offset: 0, 0
+  index: -1
+Word TH/WrdTH_Glow
+  rotate: false
+  xy: 475, 693
+  size: 238, 222
+  orig: 259, 240
+  offset: 10, 9
+  index: -1
+Word/Wrd_01
+  rotate: false
+  xy: 454, 265
+  size: 219, 202
+  orig: 219, 202
+  offset: 0, 0
+  index: -1
+Word/Wrd_04
+  rotate: false
+  xy: 442, 61
+  size: 219, 202
+  orig: 219, 202
+  offset: 0, 0
+  index: -1
+Word/Wrd_06
+  rotate: false
+  xy: 663, 54
+  size: 219, 202
+  orig: 219, 202
+  offset: 0, 0
+  index: -1
+Word/Wrd_Glow
+  rotate: false
+  xy: 715, 693
+  size: 238, 222
+  orig: 259, 240
+  offset: 10, 9
+  index: -1
+
+VisualTypes_2.png
+size: 1024, 1024
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+Five-Bar/Fiv_00
+  rotate: false
+  xy: 653, 654
+  size: 216, 210
+  orig: 216, 210
+  offset: 0, 0
+  index: -1
+Five-Bar/Fiv_01
+  rotate: false
+  xy: 434, 654
+  size: 217, 210
+  orig: 217, 210
+  offset: 0, 0
+  index: -1
+Five-Bar/Fiv_02
+  rotate: false
+  xy: 654, 442
+  size: 216, 210
+  orig: 216, 210
+  offset: 0, 0
+  index: -1
+Five-Bar/Fiv_03
+  rotate: false
+  xy: 648, 230
+  size: 216, 210
+  orig: 216, 210
+  offset: 0, 0
+  index: -1
+Five-Bar/Fiv_04
+  rotate: false
+  xy: 648, 18
+  size: 216, 210
+  orig: 216, 210
+  offset: 0, 0
+  index: -1
+Negative/Neg_00
+  rotate: false
+  xy: 218, 434
+  size: 213, 214
+  orig: 213, 214
+  offset: 0, 0
+  index: -1
+Negative/Neg_02
+  rotate: false
+  xy: 2, 650
+  size: 214, 214
+  orig: 214, 214
+  offset: 0, 0
+  index: -1
+Negative/Neg_03
+  rotate: false
+  xy: 2, 2
+  size: 213, 214
+  orig: 213, 214
+  offset: 0, 0
+  index: -1
+Negative/Neg_04
+  rotate: false
+  xy: 218, 218
+  size: 213, 214
+  orig: 213, 214
+  offset: 0, 0
+  index: -1
+Negative/Neg_05
+  rotate: false
+  xy: 217, 2
+  size: 213, 214
+  orig: 213, 214
+  offset: 0, 0
+  index: -1
+Negative/Neg_06
+  rotate: false
+  xy: 2, 434
+  size: 214, 214
+  orig: 214, 214
+  offset: 0, 0
+  index: -1
+Negative/Neg_07
+  rotate: false
+  xy: 433, 234
+  size: 213, 214
+  orig: 213, 214
+  offset: 0, 0
+  index: -1
+Negative/Neg_08
+  rotate: false
+  xy: 433, 18
+  size: 213, 214
+  orig: 213, 214
+  offset: 0, 0
+  index: -1
+Negative/Neg_09
+  rotate: false
+  xy: 218, 650
+  size: 214, 214
+  orig: 214, 214
+  offset: 0, 0
+  index: -1
+Negative/Neg_11
+  rotate: false
+  xy: 2, 218
+  size: 214, 214
+  orig: 214, 214
+  offset: 0, 0
+  index: -1
+Word TH/WrdTH_00
+  rotate: false
+  xy: 434, 450
+  size: 218, 202
+  orig: 218, 202
+  offset: 0, 0
+  index: -1
+
+VisualTypes_3.png
+size: 1024, 1024
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+Clock/Clk_01
+  rotate: false
+  xy: 660, 223
+  size: 209, 209
+  orig: 209, 209
+  offset: 0, 0
+  index: -1
+Clock/Clk_02
+  rotate: false
+  xy: 660, 12
+  size: 209, 209
+  orig: 209, 209
+  offset: 0, 0
+  index: -1
+Five-Bar/Fiv_05
+  rotate: false
+  xy: 217, 646
+  size: 216, 210
+  orig: 216, 210
+  offset: 0, 0
+  index: -1
+Five-Bar/Fiv_06
+  rotate: false
+  xy: 217, 434
+  size: 216, 210
+  orig: 216, 210
+  offset: 0, 0
+  index: -1
+Five-Bar/Fiv_07
+  rotate: false
+  xy: 435, 646
+  size: 216, 210
+  orig: 216, 210
+  offset: 0, 0
+  index: -1
+Five-Bar/Fiv_08
+  rotate: false
+  xy: 435, 434
+  size: 216, 210
+  orig: 216, 210
+  offset: 0, 0
+  index: -1
+Five-Bar/Fiv_09
+  rotate: false
+  xy: 653, 646
+  size: 216, 210
+  orig: 216, 210
+  offset: 0, 0
+  index: -1
+Five-Bar/Fiv_10
+  rotate: false
+  xy: 653, 434
+  size: 216, 210
+  orig: 216, 210
+  offset: 0, 0
+  index: -1
+Five-Bar/Fiv_11
+  rotate: false
+  xy: 2, 214
+  size: 216, 210
+  orig: 216, 210
+  offset: 0, 0
+  index: -1
+Five-Bar/Fiv_12
+  rotate: false
+  xy: 2, 2
+  size: 216, 210
+  orig: 216, 210
+  offset: 0, 0
+  index: -1
+Negative/Neg_10
+  rotate: false
+  xy: 2, 642
+  size: 213, 214
+  orig: 213, 214
+  offset: 0, 0
+  index: -1
+Negative/Neg_12
+  rotate: false
+  xy: 2, 426
+  size: 213, 214
+  orig: 213, 214
+  offset: 0, 0
+  index: -1
+Word TH/WrdTH_02
+  rotate: false
+  xy: 220, 230
+  size: 218, 202
+  orig: 218, 202
+  offset: 0, 0
+  index: -1
+Word TH/WrdTH_03
+  rotate: false
+  xy: 220, 26
+  size: 218, 202
+  orig: 218, 202
+  offset: 0, 0
+  index: -1
+Word TH/WrdTH_05
+  rotate: false
+  xy: 440, 230
+  size: 218, 202
+  orig: 218, 202
+  offset: 0, 0
+  index: -1
+Word TH/WrdTH_06
+  rotate: false
+  xy: 440, 26
+  size: 218, 202
+  orig: 218, 202
+  offset: 0, 0
+  index: -1
+
+VisualTypes_4.png
+size: 1024, 1024
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+Clock/Clk_03
+  rotate: false
+  xy: 662, 403
+  size: 209, 209
+  orig: 209, 209
+  offset: 0, 0
+  index: -1
+Clock/Clk_04
+  rotate: false
+  xy: 662, 192
+  size: 209, 209
+  orig: 209, 209
+  offset: 0, 0
+  index: -1
+Dice/Dic_00
+  rotate: false
+  xy: 442, 2
+  size: 202, 202
+  orig: 202, 202
+  offset: 0, 0
+  index: -1
+Word TH/WrdTH_07
+  rotate: false
+  xy: 2, 818
+  size: 218, 202
+  orig: 218, 202
+  offset: 0, 0
+  index: -1
+Word TH/WrdTH_08
+  rotate: false
+  xy: 2, 614
+  size: 218, 202
+  orig: 218, 202
+  offset: 0, 0
+  index: -1
+Word TH/WrdTH_09
+  rotate: false
+  xy: 222, 818
+  size: 218, 202
+  orig: 218, 202
+  offset: 0, 0
+  index: -1
+Word TH/WrdTH_10
+  rotate: false
+  xy: 2, 410
+  size: 218, 202
+  orig: 218, 202
+  offset: 0, 0
+  index: -1
+Word TH/WrdTH_11
+  rotate: false
+  xy: 222, 614
+  size: 218, 202
+  orig: 218, 202
+  offset: 0, 0
+  index: -1
+Word TH/WrdTH_12
+  rotate: false
+  xy: 442, 818
+  size: 218, 202
+  orig: 218, 202
+  offset: 0, 0
+  index: -1
+Word/Wrd_00
+  rotate: false
+  xy: 2, 206
+  size: 218, 202
+  orig: 218, 202
+  offset: 0, 0
+  index: -1
+Word/Wrd_02
+  rotate: false
+  xy: 222, 410
+  size: 218, 202
+  orig: 218, 202
+  offset: 0, 0
+  index: -1
+Word/Wrd_03
+  rotate: false
+  xy: 442, 614
+  size: 218, 202
+  orig: 218, 202
+  offset: 0, 0
+  index: -1
+Word/Wrd_05
+  rotate: false
+  xy: 662, 818
+  size: 218, 202
+  orig: 218, 202
+  offset: 0, 0
+  index: -1
+Word/Wrd_07
+  rotate: false
+  xy: 2, 2
+  size: 218, 202
+  orig: 218, 202
+  offset: 0, 0
+  index: -1
+Word/Wrd_08
+  rotate: false
+  xy: 222, 206
+  size: 218, 202
+  orig: 218, 202
+  offset: 0, 0
+  index: -1
+Word/Wrd_09
+  rotate: false
+  xy: 442, 410
+  size: 218, 202
+  orig: 218, 202
+  offset: 0, 0
+  index: -1
+Word/Wrd_10
+  rotate: false
+  xy: 662, 614
+  size: 218, 202
+  orig: 218, 202
+  offset: 0, 0
+  index: -1
+Word/Wrd_11
+  rotate: false
+  xy: 222, 2
+  size: 218, 202
+  orig: 218, 202
+  offset: 0, 0
+  index: -1
+Word/Wrd_12
+  rotate: false
+  xy: 442, 206
+  size: 218, 202
+  orig: 218, 202
+  offset: 0, 0
+  index: -1
+
+VisualTypes_5.png
+size: 1024, 1024
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+Clock/Clk_05
+  rotate: false
+  xy: 2, 635
+  size: 209, 209
+  orig: 209, 209
+  offset: 0, 0
+  index: -1
+Clock/Clk_06
+  rotate: false
+  xy: 2, 424
+  size: 209, 209
+  orig: 209, 209
+  offset: 0, 0
+  index: -1
+Clock/Clk_07
+  rotate: false
+  xy: 213, 635
+  size: 209, 209
+  orig: 209, 209
+  offset: 0, 0
+  index: -1
+Clock/Clk_08
+  rotate: false
+  xy: 2, 213
+  size: 209, 209
+  orig: 209, 209
+  offset: 0, 0
+  index: -1
+Clock/Clk_09
+  rotate: false
+  xy: 213, 424
+  size: 209, 209
+  orig: 209, 209
+  offset: 0, 0
+  index: -1
+Clock/Clk_10
+  rotate: false
+  xy: 424, 635
+  size: 209, 209
+  orig: 209, 209
+  offset: 0, 0
+  index: -1
+Clock/Clk_11
+  rotate: false
+  xy: 2, 2
+  size: 209, 209
+  orig: 209, 209
+  offset: 0, 0
+  index: -1
+Clock/Clk_12
+  rotate: false
+  xy: 213, 213
+  size: 209, 209
+  orig: 209, 209
+  offset: 0, 0
+  index: -1
+Dice/Dic_01
+  rotate: false
+  xy: 424, 431
+  size: 202, 202
+  orig: 202, 202
+  offset: 0, 0
+  index: -1
+Dice/Dic_02
+  rotate: false
+  xy: 635, 642
+  size: 202, 202
+  orig: 202, 202
+  offset: 0, 0
+  index: -1
+Dice/Dic_03
+  rotate: false
+  xy: 213, 9
+  size: 202, 202
+  orig: 202, 202
+  offset: 0, 0
+  index: -1
+Dice/Dic_04
+  rotate: false
+  xy: 424, 227
+  size: 202, 202
+  orig: 202, 202
+  offset: 0, 0
+  index: -1
+Dice/Dic_05
+  rotate: false
+  xy: 424, 23
+  size: 202, 202
+  orig: 202, 202
+  offset: 0, 0
+  index: -1
+Dice/Dic_06
+  rotate: false
+  xy: 628, 431
+  size: 202, 202
+  orig: 202, 202
+  offset: 0, 0
+  index: -1
+Dice/Dic_07
+  rotate: false
+  xy: 628, 227
+  size: 202, 202
+  orig: 202, 202
+  offset: 0, 0
+  index: -1
+Dice/Dic_08
+  rotate: false
+  xy: 628, 23
+  size: 202, 202
+  orig: 202, 202
+  offset: 0, 0
+  index: -1
+
+VisualTypes_6.png
+size: 1024, 1024
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+Dice/Dic_09
+  rotate: false
+  xy: 2, 818
+  size: 202, 202
+  orig: 202, 202
+  offset: 0, 0
+  index: -1
+Dice/Dic_10
+  rotate: false
+  xy: 2, 614
+  size: 202, 202
+  orig: 202, 202
+  offset: 0, 0
+  index: -1
+Dice/Dic_11
+  rotate: false
+  xy: 206, 818
+  size: 202, 202
+  orig: 202, 202
+  offset: 0, 0
+  index: -1
+Dice/Dic_12
+  rotate: false
+  xy: 2, 410
+  size: 202, 202
+  orig: 202, 202
+  offset: 0, 0
+  index: -1
+Number TH/NumTH_00
+  rotate: false
+  xy: 206, 614
+  size: 202, 202
+  orig: 202, 202
+  offset: 0, 0
+  index: -1
+Number TH/NumTH_01
+  rotate: false
+  xy: 410, 818
+  size: 202, 202
+  orig: 202, 202
+  offset: 0, 0
+  index: -1
+Number TH/NumTH_02
+  rotate: false
+  xy: 2, 206
+  size: 202, 202
+  orig: 202, 202
+  offset: 0, 0
+  index: -1
+Number TH/NumTH_03
+  rotate: false
+  xy: 206, 410
+  size: 202, 202
+  orig: 202, 202
+  offset: 0, 0
+  index: -1
+Number TH/NumTH_04
+  rotate: false
+  xy: 410, 614
+  size: 202, 202
+  orig: 202, 202
+  offset: 0, 0
+  index: -1
+Number TH/NumTH_05
+  rotate: false
+  xy: 614, 818
+  size: 202, 202
+  orig: 202, 202
+  offset: 0, 0
+  index: -1
+Number TH/NumTH_06
+  rotate: false
+  xy: 2, 2
+  size: 202, 202
+  orig: 202, 202
+  offset: 0, 0
+  index: -1
+Number TH/NumTH_07
+  rotate: false
+  xy: 206, 206
+  size: 202, 202
+  orig: 202, 202
+  offset: 0, 0
+  index: -1
+Number TH/NumTH_08
+  rotate: false
+  xy: 410, 410
+  size: 202, 202
+  orig: 202, 202
+  offset: 0, 0
+  index: -1
+Number TH/NumTH_09
+  rotate: false
+  xy: 614, 614
+  size: 202, 202
+  orig: 202, 202
+  offset: 0, 0
+  index: -1
+Number TH/NumTH_10
+  rotate: false
+  xy: 818, 818
+  size: 202, 202
+  orig: 202, 202
+  offset: 0, 0
+  index: -1
+Number TH/NumTH_11
+  rotate: false
+  xy: 206, 2
+  size: 202, 202
+  orig: 202, 202
+  offset: 0, 0
+  index: -1
+Number TH/NumTH_12
+  rotate: false
+  xy: 410, 206
+  size: 202, 202
+  orig: 202, 202
+  offset: 0, 0
+  index: -1
+Number/Num_00
+  rotate: false
+  xy: 614, 410
+  size: 202, 202
+  orig: 202, 202
+  offset: 0, 0
+  index: -1
+Number/Num_01
+  rotate: false
+  xy: 818, 614
+  size: 202, 202
+  orig: 202, 202
+  offset: 0, 0
+  index: -1
+Number/Num_02
+  rotate: false
+  xy: 410, 2
+  size: 202, 202
+  orig: 202, 202
+  offset: 0, 0
+  index: -1
+Number/Num_03
+  rotate: false
+  xy: 614, 206
+  size: 202, 202
+  orig: 202, 202
+  offset: 0, 0
+  index: -1
+Number/Num_04
+  rotate: false
+  xy: 818, 410
+  size: 202, 202
+  orig: 202, 202
+  offset: 0, 0
+  index: -1
+Number/Num_05
+  rotate: false
+  xy: 614, 2
+  size: 202, 202
+  orig: 202, 202
+  offset: 0, 0
+  index: -1
+Number/Num_06
+  rotate: false
+  xy: 818, 206
+  size: 202, 202
+  orig: 202, 202
+  offset: 0, 0
+  index: -1
+Number/Num_07
+  rotate: false
+  xy: 818, 2
+  size: 202, 202
+  orig: 202, 202
+  offset: 0, 0
+  index: -1
+
+VisualTypes_7.png
+size: 1024, 1024
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+Number/Num_08
+  rotate: false
+  xy: 2, 816
+  size: 202, 202
+  orig: 202, 202
+  offset: 0, 0
+  index: -1
+Number/Num_09
+  rotate: false
+  xy: 2, 612
+  size: 202, 202
+  orig: 202, 202
+  offset: 0, 0
+  index: -1
+Number/Num_10
+  rotate: false
+  xy: 206, 816
+  size: 202, 202
+  orig: 202, 202
+  offset: 0, 0
+  index: -1
+Number/Num_11
+  rotate: false
+  xy: 2, 408
+  size: 202, 202
+  orig: 202, 202
+  offset: 0, 0
+  index: -1
+Number/Num_12
+  rotate: false
+  xy: 206, 612
+  size: 202, 202
+  orig: 202, 202
+  offset: 0, 0
+  index: -1
+Roman/Rom_00
+  rotate: false
+  xy: 410, 817
+  size: 201, 201
+  orig: 201, 201
+  offset: 0, 0
+  index: -1
+Roman/Rom_01
+  rotate: false
+  xy: 2, 205
+  size: 201, 201
+  orig: 201, 201
+  offset: 0, 0
+  index: -1
+Roman/Rom_02
+  rotate: false
+  xy: 206, 409
+  size: 201, 201
+  orig: 201, 201
+  offset: 0, 0
+  index: -1
+Roman/Rom_03
+  rotate: false
+  xy: 410, 614
+  size: 201, 201
+  orig: 201, 201
+  offset: 0, 0
+  index: -1
+Roman/Rom_04
+  rotate: false
+  xy: 613, 817
+  size: 201, 201
+  orig: 201, 201
+  offset: 0, 0
+  index: -1
+Roman/Rom_05
+  rotate: false
+  xy: 2, 2
+  size: 201, 201
+  orig: 201, 201
+  offset: 0, 0
+  index: -1
+Roman/Rom_06
+  rotate: false
+  xy: 613, 614
+  size: 201, 201
+  orig: 201, 201
+  offset: 0, 0
+  index: -1
+Roman/Rom_07
+  rotate: false
+  xy: 816, 817
+  size: 201, 201
+  orig: 201, 201
+  offset: 0, 0
+  index: -1
+Roman/Rom_08
+  rotate: false
+  xy: 816, 614
+  size: 201, 201
+  orig: 201, 201
+  offset: 0, 0
+  index: -1
+Roman/Rom_09
+  rotate: false
+  xy: 410, 411
+  size: 201, 201
+  orig: 201, 201
+  offset: 0, 0
+  index: -1
+Roman/Rom_10
+  rotate: false
+  xy: 613, 411
+  size: 201, 201
+  orig: 201, 201
+  offset: 0, 0
+  index: -1
+Roman/Rom_11
+  rotate: false
+  xy: 816, 411
+  size: 201, 201
+  orig: 201, 201
+  offset: 0, 0
+  index: -1
+Roman/Rom_12
+  rotate: false
+  xy: 205, 205
+  size: 201, 201
+  orig: 201, 201
+  offset: 0, 0
+  index: -1

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>GOL — Result</title>
+  <link rel="stylesheet" href="css/main.css">
+  <script src="js/scaler.js" defer></script>
+</head>
+<body>
+
+  <!-- ── Own result (shown after playing) ── -->
+  <div id="result-screen" class="screen">
+    <div id="result-title">RESULT</div>
+
+    <div class="result-board">
+      <div class="result-item">
+        <span class="label">SCORE</span>
+        <span class="value" id="r-score">0</span>
+      </div>
+      <div class="result-item">
+        <span class="label">COMBO</span>
+        <span class="value" id="r-combo">0</span>
+      </div>
+      <div class="result-item">
+        <span class="label">BONUS</span>
+        <span class="value" id="r-bonus">0</span>
+      </div>
+      <div class="result-item">
+        <span class="label">BEST</span>
+        <span class="value best" id="r-best">0</span>
+      </div>
+    </div>
+
+    <div class="result-actions">
+      <button class="menu-btn btn-primary"   id="btn-share">SHARE</button>
+      <button class="menu-btn btn-secondary" id="btn-back">BACK</button>
+    </div>
+  </div>
+
+  <!-- ── Challenge view (opened via share link) ── -->
+  <div id="challenge-screen" class="screen" style="display:none">
+    <div id="challenge-title">CHALLENGE</div>
+    <div class="challenge-label">CAN YOU BEAT</div>
+    <div class="challenge-score" id="c-score">0</div>
+    <div class="challenge-sub"   id="c-sub"></div>
+    <button class="menu-btn btn-primary" id="btn-play-now">PLAY NOW</button>
+  </div>
+
+  <!-- ── Share modal ── -->
+  <div id="share-modal" class="modal-overlay" style="display:none">
+    <div class="modal-card">
+      <div class="modal-title">SHARE</div>
+      <p class="modal-preview" id="share-preview"></p>
+      <div class="share-grid">
+        <button class="share-btn" id="btn-messenger">
+          <span class="share-icon">💬</span>
+          <span>Messenger</span>
+        </button>
+        <button class="share-btn" id="btn-share-other">
+          <span class="share-icon">&#x2191;</span>
+          <span>Share</span>
+        </button>
+        <button class="share-btn" id="btn-copy">
+          <span class="share-icon">&#x1F517;</span>
+          <span id="copy-label">Copy</span>
+        </button>
+      </div>
+      <button class="menu-btn btn-secondary" id="btn-modal-cancel">CANCEL</button>
+    </div>
+  </div>
+
+  <script type="module">
+    import { encryptPayload, decryptPayload } from './js/duelCrypto.js';
+
+    // Set to your Facebook Instant Game App ID when ready.
+    // Messenger share will use https://fb.gg/play/<ID>?d=... once configured.
+    const INSTANT_GAME_ID = '';
+
+    const params     = new URLSearchParams(window.location.search);
+    const sharedData = params.get('d');
+
+    if (sharedData) {
+      showChallengeView(sharedData);
+    } else {
+      showOwnResult();
+    }
+
+    // ── Own result view ──────────────────────────────────────────────
+    function showOwnResult() {
+      const result  = JSON.parse(sessionStorage.getItem('gameResult') || '{}');
+      const best    = parseInt(localStorage.getItem('bestScore') || '0', 10);
+      const score   = result.score ?? 0;
+      const combo   = result.combo ?? 0;
+      const bonus   = result.bonus ?? 0;
+      const newBest = Math.max(best, score);
+      localStorage.setItem('bestScore', newBest);
+
+      document.getElementById('r-score').textContent = score;
+      document.getElementById('r-combo').textContent = combo;
+      document.getElementById('r-bonus').textContent = bonus;
+      document.getElementById('r-best').textContent  = newBest;
+
+      document.getElementById('btn-back').addEventListener('click', () => {
+        sessionStorage.removeItem('gameResult');
+        window.location.href = 'index.html';
+      });
+
+      // Share button: encrypt result then open modal
+      document.getElementById('btn-share').addEventListener('click', async () => {
+        const payload = { score, combo, bonus, t: Math.floor(Date.now() / 1000), seed: result.seed };
+        const encoded = await encryptPayload(payload);
+
+        const dir    = window.location.origin + window.location.pathname.replace(/[^/]*$/, '');
+        const webUrl = `${dir}result.html?d=${encoded}`;
+        const igUrl  = INSTANT_GAME_ID
+          ? `https://fb.gg/play/${INSTANT_GAME_ID}?d=${encoded}`
+          : webUrl;
+
+        document.getElementById('share-preview').textContent = `I scored ${score} in GOL!`;
+        document.getElementById('btn-messenger').dataset.url   = igUrl;
+        document.getElementById('btn-share-other').dataset.url = webUrl;
+        document.getElementById('btn-copy').dataset.url        = webUrl;
+
+        document.getElementById('share-modal').style.display = '';
+      });
+
+      setupShareModal();
+    }
+
+    // ── Challenge view (opened from share link) ──────────────────────
+    async function showChallengeView(encoded) {
+      document.getElementById('result-screen').style.display    = 'none';
+      document.getElementById('challenge-screen').style.display = '';
+
+      let challengeSeed = null;
+      try {
+        const payload = await decryptPayload(encoded);
+        document.getElementById('c-score').textContent = payload.score ?? '?';
+        if (payload.combo) {
+          document.getElementById('c-sub').textContent = `combo ${payload.combo}`;
+        }
+        if (payload.seed != null) challengeSeed = payload.seed;
+      } catch {
+        document.getElementById('c-score').textContent = '?';
+      }
+
+      document.getElementById('btn-play-now').addEventListener('click', () => {
+        sessionStorage.removeItem('gameResult');
+        if (challengeSeed != null) sessionStorage.setItem('pendingSeed', challengeSeed);
+        window.location.href = 'game.html';
+      });
+    }
+
+    // ── Share modal ──────────────────────────────────────────────────
+    function setupShareModal() {
+      const modal = document.getElementById('share-modal');
+
+      document.getElementById('btn-modal-cancel').addEventListener('click', () => {
+        modal.style.display = 'none';
+      });
+      modal.addEventListener('click', e => {
+        if (e.target === modal) modal.style.display = 'none';
+      });
+
+      // Messenger → fb-messenger:// deep link (Instant Game URL if configured)
+      document.getElementById('btn-messenger').addEventListener('click', () => {
+        const url = document.getElementById('btn-messenger').dataset.url;
+        window.location.href = `fb-messenger://share?link=${encodeURIComponent(url)}`;
+      });
+
+      // Share → Web Share API; fallback to WhatsApp
+      document.getElementById('btn-share-other').addEventListener('click', async () => {
+        const url  = document.getElementById('btn-share-other').dataset.url;
+        const text = document.getElementById('share-preview').textContent;
+        if (navigator.share) {
+          try { await navigator.share({ url, text }); } catch {}
+        } else {
+          window.open(`https://wa.me/?text=${encodeURIComponent(text + ' ' + url)}`);
+        }
+      });
+
+      // Copy link
+      document.getElementById('btn-copy').addEventListener('click', async () => {
+        const url   = document.getElementById('btn-copy').dataset.url;
+        const label = document.getElementById('copy-label');
+        try {
+          await navigator.clipboard.writeText(url);
+          label.textContent = 'Copied!';
+          setTimeout(() => { label.textContent = 'Copy'; }, 2000);
+        } catch {
+          prompt('Copy this link:', url);
+        }
+      });
+    }
+  </script>
+</body>
+</html>
