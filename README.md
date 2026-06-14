@@ -1,2 +1,11 @@
-# litjitplay-web
-Official website for LITJITPLAY games and projects
+# LITJITPLAY
+
+Official website for games developed by LITJITPLAY.
+
+## Current Projects
+
+- Number Party
+
+## Website
+
+Coming soon.
