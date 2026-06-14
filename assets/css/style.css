@@ -35,6 +35,7 @@ header .container{
 .logo img{
     height:90px;
     width:auto;
+    display:block;
 }
 
 .logo{
