@@ -3,12 +3,12 @@
 <head>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8348809496077117"
      crossorigin="anonymous"></script>
-    <link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>LITJITPLAY Studios</title>
-        <link rel="icon"
+            <link rel="icon"
             type="image/png"
             href="assets/images/favicon.png">
 
@@ -17,98 +17,238 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 
         <link rel="stylesheet" 
             href="assets/css/style.css">
+
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body{
+            font-family:Arial, Helvetica, sans-serif;
+            background:#06112a;
+            color:white;
+            line-height:1.6;
+        }
+
+        .container{
+            width:90%;
+            max-width:1200px;
+            margin:auto;
+        }
+
+        /* HERO */
+
+        .hero{
+            min-height:100vh;
+
+            display:flex;
+            align-items:center;
+            justify-content:center;
+
+            text-align:center;
+
+            padding:80px 20px;
+        }
+
+        .hero-content{
+            max-width:900px;
+        }
+
+        .logo{
+            margin-bottom:40px;
+        }
+
+        .logo img{
+            width:320px;
+            max-width:80%;
+            height:auto;
+        }
+
+        h1{
+            font-size:clamp(2.5rem, 6vw, 5rem);
+            margin-bottom:20px;
+        }
+
+        .subtitle{
+            font-size:clamp(1.1rem, 2vw, 1.5rem);
+            color:#d0d7e6;
+            margin-bottom:30px;
+        }
+
+        .coming-soon{
+            display:inline-block;
+
+            padding:12px 24px;
+
+            background:#ffb000;
+            color:#06112a;
+
+            font-weight:bold;
+
+            border-radius:999px;
+
+            margin-bottom:40px;
+        }
+
+        /* PROJECTS */
+
+        .projects{
+            margin-top:40px;
+        }
+
+        .projects h2{
+            margin-bottom:25px;
+            font-size:2rem;
+        }
+
+        .project-grid{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+            gap:20px;
+        }
+
+        .project-card{
+            background:#0d1b3d;
+
+            border:1px solid rgba(255,255,255,.08);
+
+            border-radius:16px;
+
+            padding:24px;
+        }
+
+        .project-card h3{
+            margin-bottom:10px;
+        }
+
+        .project-status{
+            display:inline-block;
+
+            margin-top:15px;
+
+            padding:6px 12px;
+
+            border-radius:999px;
+
+            background:#1c3b7a;
+
+            font-size:.85rem;
+        }
+
+        /* SOCIAL */
+
+        .social{
+            margin-top:60px;
+        }
+
+        .social h2{
+            margin-bottom:20px;
+        }
+
+        .social-links{
+            display:flex;
+            justify-content:center;
+            gap:15px;
+            flex-wrap:wrap;
+        }
+
+        .social-links a{
+            text-decoration:none;
+            color:white;
+
+            padding:12px 20px;
+
+            border-radius:10px;
+
+            background:#0d1b3d;
+
+            transition:.2s;
+        }
+
+        .social-links a:hover{
+            transform:translateY(-2px);
+            background:#17306b;
+        }
+
+        /* FOOTER */
+
+        footer{
+            margin-top:80px;
+
+            text-align:center;
+
+            padding:30px 20px;
+
+            border-top:1px solid rgba(255,255,255,.08);
+
+            color:#aab4c8;
+        }
+    </style>
 </head>
 <body>
 
-<header>
-    <div class="container">
-        <div class="logo">
-            <img src="assets/images/logo.png" alt="LITJITPLAY Studios">
-        </div>
-
-        <nav>
-            <a href="#games">Games</a>
-            <a href="support.html">Support</a>
-            <a href="privacy-policy.html">Privacy</a>
-        </nav>
-    </div>
-</header>
-
 <section class="hero">
-    <div class="container">
-        <h1>Creating Fun Games & Original IPs</h1>
 
-        <p>
-            Independent game studio from Thailand.
-            Building fun and accessible games for players around the world.
-        </p>
-
-        <a href="#games" class="btn">
-            Explore Games
-        </a>
-    </div>
-</section>
-
-<section id="games" class="games">
     <div class="container">
 
-        <h2>Featured Games</h2>
+        <div class="hero-content">
 
-        <div class="cards">
-
-            <div class="card featured">
-                <div class="badge">IN DEVELOPMENT</div>
-
-                <h3>Number Party</h3>
-
-                <p>
-                    Fast-paced number puzzle game focused on combos,
-                    score chasing and endless fun.
-                </p>
-
-                <a href="games/numberparty/index.html">
-                    Play DEMO →
-                </a>
+            <div class="logo">
+                <img src="assets/images/logo.png" alt="LITJITPLAY Studios
             </div>
 
-            <div class="card">
-                <div class="badge upcoming">COMING SOON</div>
+            <h1>Creating Fun Games & Original IPs</h1>
 
-                <h3>Hoop Hero X</h3>
+            <p class="subtitle">
+                Independent game studio from Thailand creating fun,
+                accessible and memorable gaming experiences.
+            </p>
 
-                <p>
-                    Arcade basketball experience focused on precision,
-                    timing and high scores.
-                </p>
-
-                <span class="coming">
-                    Coming Soon
-                </span>
+            <div class="coming-soon">
+                🚀 Official Website Launching Soon
             </div>
 
-        </div>
+            <div class="projects">
 
-    </div>
-</section>
+                <h2>Current Projects</h2>
 
-<section class="about">
-    <div class="container">
+                <div class="project-grid">
 
-        <h2>About LITJITPLAY Studios</h2>
+                    <div class="project-card">
+                        <h3>🎉 Number Party</h3>
 
-        <p>
-            LITJITPLAY Studios is an independent game studio creating
-            original games, characters and IPs with the help of
-            modern tools and AI-assisted development.
-        </p>
+                        <p>
+                            Fast-paced multiplayer party game where numbers become chaos.
+                        </p>
 
-    </div>
-</section>
+                        <span class="project-status">
+                            Coming Soon
+                        </span>
+                    </div>
 
-<section class="social">
-    <div class="container">
+                    <div class="project-card">
+                        <h3>🏀 Hoop Hero X</h3>
 
-        <h2>Follow Us</h2>
+                        <p>
+                            Arcade basketball action built for quick and fun gameplay.
+                        </p>
+
+                        <span class="project-status">
+                            In Development
+                        </span>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="social">
+
+                <h2>Follow Development</h2>
 
         <div class="social-links">
             <a href="https://x.com/LitJitPlay">
@@ -125,14 +265,16 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
             </a>
         </div>
 
+            </div>
+
+        </div>
+
     </div>
+
 </section>
 
 <footer>
-    <div class="container">
-        <p>©2026 LITJITPLAY Studios</p>
-        <p>Made in Thailand 🇹🇭</p>
-    </div>
+    © 2026 LITJITPLAY Studios • Bangkok, Thailand
 </footer>
 
 </body>
