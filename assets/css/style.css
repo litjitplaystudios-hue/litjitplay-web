@@ -1,1 +1,186 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:#0f172a;
+    color:#f8fafc;
+    line-height:1.6;
+}
+
+.container{
+    width:90%;
+    max-width:1200px;
+    margin:auto;
+}
+
+header{
+    padding:20px 0;
+    border-bottom:1px solid rgba(255,255,255,.1);
+}
+
+header .container{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    font-size:1.5rem;
+    font-weight:700;
+}
+
+nav{
+    display:flex;
+    gap:20px;
+}
+
+nav a{
+    color:#cbd5e1;
+    text-decoration:none;
+}
+
+nav a:hover{
+    color:#38bdf8;
+}
+
+.hero{
+    padding:120px 0;
+    text-align:center;
+}
+
+.hero h1{
+    font-size:3rem;
+    margin-bottom:20px;
+}
+
+.hero p{
+    max-width:700px;
+    margin:auto;
+    color:#cbd5e1;
+}
+
+.btn{
+    display:inline-block;
+    margin-top:30px;
+    padding:14px 28px;
+    background:#38bdf8;
+    color:#fff;
+    text-decoration:none;
+    border-radius:10px;
+    font-weight:bold;
+}
+
+.games{
+    padding:80px 0;
+}
+
+.games h2{
+    text-align:center;
+    margin-bottom:40px;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+    gap:30px;
+}
+
+.card{
+    background:#1e293b;
+    padding:30px;
+    border-radius:20px;
+    border:1px solid rgba(255,255,255,.08);
+}
+
+.card h3{
+    margin:15px 0;
+    font-size:1.8rem;
+}
+
+.card p{
+    color:#cbd5e1;
+}
+
+.card a{
+    display:inline-block;
+    margin-top:20px;
+    color:#38bdf8;
+    text-decoration:none;
+}
+
+.badge{
+    display:inline-block;
+    padding:6px 12px;
+    background:#22c55e;
+    border-radius:20px;
+    font-size:.75rem;
+    font-weight:bold;
+}
+
+.upcoming{
+    background:#f59e0b;
+}
+
+.coming{
+    display:inline-block;
+    margin-top:20px;
+    color:#f59e0b;
+    font-weight:bold;
+}
+
+.about,
+.social{
+    padding:80px 0;
+    text-align:center;
+}
+
+.about p{
+    max-width:800px;
+    margin:auto;
+    color:#cbd5e1;
+}
+
+.social-links{
+    margin-top:30px;
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.social-links a{
+    color:#38bdf8;
+    text-decoration:none;
+}
+
+footer{
+    margin-top:80px;
+    padding:30px 0;
+    border-top:1px solid rgba(255,255,255,.1);
+    text-align:center;
+    color:#94a3b8;
+}
+
+@media(max-width:768px){
+
+    header .container{
+        flex-direction:column;
+        gap:15px;
+    }
+
+    .hero{
+        padding:80px 0;
+    }
+
+    .hero h1{
+        font-size:2rem;
+    }
+}
