@@ -32,6 +32,12 @@ header .container{
     align-items:center;
 }
 
+.logo img{
+    height:60px;
+    width:auto;
+    display:block;
+}
+
 .logo{
     font-size:1.5rem;
     font-weight:700;
