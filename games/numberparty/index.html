@@ -1,29 +1,82 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8348809496077117"
-     crossorigin="anonymous"></script>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=0.5, maximum-scale=0.5">
-  <title>HiLo Rush</title>
-  <link rel="stylesheet" href="css/main.css">
-  <script src="js/scaler.js" defer></script>
-</head>
-<body>
-  <div id="menu-screen" class="screen">
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+    <title>Number Party</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: #000;
+      }
 
-    <div id="menu-title">HiLo Rush</div>
+      #unity-container {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #000;
+      }
 
-    <button class="menu-btn btn-primary" id="btn-play">PLAY</button>
+      #unity-canvas {
+        height: 100vh;
+        width: auto;
+        aspect-ratio: 9 / 16;
+        max-width: 100vw;
+        max-height: 100vh;
+        background: #000;
+        outline: none;
+      }
 
-    <a href="/">← Back to Home</a>
+      #unity-loading-bar {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: min(64vw, 360px);
+        height: 8px;
+        background: rgba(255, 255, 255, 0.18);
+      }
 
-  </div>
+      #unity-progress-bar-full {
+        width: 0%;
+        height: 100%;
+        background: #34c879;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="unity-container">
+      <canvas id="unity-canvas" width=960 height=600 tabindex="-1"></canvas>
+      <div id="unity-loading-bar">
+        <div id="unity-progress-bar-full"></div>
+      </div>
+    </div>
+    <script src="Build/NumberParty.loader.js"></script>
+    <script>
+      const canvas = document.querySelector("#unity-canvas");
+      const loadingBar = document.querySelector("#unity-loading-bar");
+      const progressBarFull = document.querySelector("#unity-progress-bar-full");
 
-  <script>
-    document.getElementById('btn-play').addEventListener('click', () => {
-      window.location.href = 'game.html';
-    });
-  </script>
-</body>
+      createUnityInstance(canvas, {
+        dataUrl: "Build/NumberParty.data.gz",
+        frameworkUrl: "Build/NumberParty.framework.js.gz",
+        codeUrl: "Build/NumberParty.wasm.gz",
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "DefaultCompany",
+        productName: "Number Party",
+        productVersion: "1.0"
+      }, (progress) => {
+        progressBarFull.style.width = `${100 * progress}%`;
+      }).then(() => {
+        loadingBar.style.display = "none";
+      });
+    </script>
+  </body>
 </html>
