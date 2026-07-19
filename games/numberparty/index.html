@@ -49,6 +49,18 @@
         height: 100%;
         background: #34c879;
       }
+
+      #unity-error-message {
+        display: none;
+        position: absolute;
+        left: 50%;
+        top: calc(50% + 40px);
+        transform: translateX(-50%);
+        width: min(80vw, 520px);
+        color: #fff;
+        font: 16px/1.5 sans-serif;
+        text-align: center;
+      }
     </style>
   </head>
   <body>
@@ -57,17 +69,19 @@
       <div id="unity-loading-bar">
         <div id="unity-progress-bar-full"></div>
       </div>
+      <div id="unity-error-message" role="alert"></div>
     </div>
     <script src="Build/NumberParty.loader.js"></script>
     <script>
       const canvas = document.querySelector("#unity-canvas");
       const loadingBar = document.querySelector("#unity-loading-bar");
       const progressBarFull = document.querySelector("#unity-progress-bar-full");
+      const errorMessage = document.querySelector("#unity-error-message");
 
       createUnityInstance(canvas, {
-        dataUrl: "Build/NumberParty.data",
-        frameworkUrl: "Build/NumberParty.framework.js",
-        codeUrl: "Build/NumberParty.wasm",
+        dataUrl: "Build/NumberParty.data.gz",
+        frameworkUrl: "Build/NumberParty.framework.js.gz",
+        codeUrl: "Build/NumberParty.wasm.gz",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "DefaultCompany",
         productName: "Number Party",
@@ -76,6 +90,11 @@
         progressBarFull.style.width = `${100 * progress}%`;
       }).then(() => {
         loadingBar.style.display = "none";
+      }).catch((error) => {
+        loadingBar.style.display = "none";
+        errorMessage.textContent = "Unable to load Number Party. Please refresh the page and try again.";
+        errorMessage.style.display = "block";
+        console.error(error);
       });
     </script>
   </body>
